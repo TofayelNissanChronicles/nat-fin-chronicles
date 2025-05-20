@@ -1,1 +1,109 @@
-# nat-fin-chronicles
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAT_Fin Chronicles</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background-color: #0f172a;
+      color: #f1f5f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .card {
+      background-color: #1e293b;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+    select, option {
+      background-color: #1e293b;
+      color: #f1f5f9;
+    }
+  </style>
+</head>
+<body class="p-6">
+  <header class="mb-8">
+    <h1 class="text-4xl font-bold text-center">🚀 NAT_Fin Chronicles</h1>
+    <p class="text-center text-sm text-gray-400">Your futuristic FX intelligence terminal</p>
+  </header>
+
+  <main class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="card">
+      <label for="currency" class="block mb-2 font-semibold">Select Currency Pair:</label>
+      <select id="currency" class="w-full p-2 rounded">
+        <option value="EURUSD">EUR/USD</option>
+        <option value="GBPUSD">GBP/USD</option>
+        <option value="USDJPY">USD/JPY</option>
+        <option value="AUDUSD">AUD/USD</option>
+        <option value="USDCAD">USD/CAD</option>
+        <option value="USDCHF">USD/CHF</option>
+        <option value="NZDUSD">NZD/USD</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <iframe id="tv-chart" src="https://www.tradingview.com/widgetembed/?symbol=FX:EURUSD&interval=60&hidesidetoolbar=1&symboledit=1&toolbarbg=f1f3f6&studies=[]&theme=dark" width="100%" height="400" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+    </div>
+
+    <div class="card">
+      <h2 class="text-xl font-bold mb-2">Currency Strength</h2>
+      <canvas id="strengthChart" width="400" height="200"></canvas>
+    </div>
+
+    <div class="card">
+      <h2 class="text-xl font-bold mb-2">Latest News</h2>
+      <p>📡 News feed integration coming soon...</p>
+    </div>
+
+    <div class="card">
+      <h2 class="text-xl font-bold mb-2">Market Sentiment</h2>
+      <p>📊 Live sentiment indicator coming soon...</p>
+    </div>
+
+    <div class="card">
+      <h2 class="text-xl font-bold mb-2">COT Data</h2>
+      <p>📈 Weekly COT data for institutional positioning...</p>
+    </div>
+
+    <div class="card">
+      <h2 class="text-xl font-bold mb-2">Economic Calendar</h2>
+      <p>📅 Calendar updates coming soon...</p>
+    </div>
+
+    <div class="card">
+      <h2 class="text-xl font-bold mb-2">Central Bank Insights</h2>
+      <p>🏦 Policy rates, next meetings, and monetary direction.</p>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('currency').addEventListener('change', function () {
+      const pair = this.value;
+      const tvFrame = document.getElementById('tv-chart');
+      tvFrame.src = `https://www.tradingview.com/widgetembed/?symbol=FX:${pair}&interval=60&hidesidetoolbar=1&theme=dark`;
+    });
+
+    const ctx = document.getElementById('strengthChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'NZD'],
+        datasets: [{
+          label: 'Strength Index',
+          data: [82, 70, 65, 60, 55, 50, 48, 45],
+          backgroundColor: '#38bdf8'
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
