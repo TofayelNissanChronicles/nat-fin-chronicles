@@ -1,0 +1,1 @@
+console.log('NAT_Fin Chronicles loaded');
